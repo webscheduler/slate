@@ -1,245 +1,821 @@
 ---
-title: API Reference
+title: Web Scheduler Local v19e21171-07a0-4f46-9eeb-429b2bc422be
+language_tabs:
+  - shell: Shell
+  - http: HTTP
+  - javascript: JavaScript
+  - ruby: Ruby
+  - python: Python
+  - php: PHP
+  - java: Java
+  - go: Go
+toc_footers: []
+includes: []
+search: false
+highlight_theme: darkula
+headingLevel: 2
 
-language_tabs: # must be one of https://git.io/vQNgJ
-  - shell
-  - ruby
-  - python
-  - javascript
-
-toc_footers:
-  - <a href='#'>Sign Up for a Developer Key</a>
-  - <a href='https://github.com/slatedocs/slate'>Documentation Powered by Slate</a>
-
-includes:
-  - errors
-
-search: true
-
-code_clipboard: true
-
-meta:
-  - name: description
-    content: Documentation for the Kittn API
 ---
 
+<!-- Generator: Widdershins v4.0.1 -->
+
+<h1 id="web-scheduler-local">Web Scheduler Local v19e21171-07a0-4f46-9eeb-429b2bc422be</h1>
+
+> Scroll down for code samples, example requests and responses. Select a language for code samples from the tabs above or the mobile navigation menu.
+
 # Introduction
+What does your API do?
 
-Welcome to the Kittn API! You can use our API to access Kittn API endpoints, which can get information on various cats, kittens, and breeds in our database.
+# Overview
+Things that the developers should know about
 
-We have language bindings in Shell, Ruby, Python, and JavaScript! You can view code examples in the dark area to the right, and you can switch the programming language of the examples with the tabs in the top right.
+# Authentication
+What is the preferred way of using the API?
 
-This example API documentation page was created with [Slate](https://github.com/slatedocs/slate). Feel free to edit it and use it as a base for your own API's documentation.
+# Error Codes
+What errors and status codes can a user expect?
+
+# Rate limit
+Is there a limit to the number of requests an user can send?
+
+Base URLs:
+
+* <a href="http://localhost:8082">http://localhost:8082</a>
+
+ License: 
 
 # Authentication
 
-> To authorize, use this code:
+- HTTP Authentication, scheme: apikey 
 
-```ruby
-require 'kittn'
+<h1 id="web-scheduler-local-default">Default</h1>
 
-api = Kittn::APIClient.authorize!('meowmeowmeow')
-```
+## Every
 
-```python
-import kittn
+<a id="opIdEvery"></a>
 
-api = kittn.authorize('meowmeowmeow')
-```
+> Code samples
 
 ```shell
-# With shell, you can just pass the correct header with each request
-curl "api_endpoint_here" \
-  -H "Authorization: meowmeowmeow"
+# You can also use wget
+curl -X POST http://localhost:8082/v1/schedules/every?apiKey=b1b0d2d0cb1ef52a96cb5e66a66738bca95b4b8d8fbf0820b459f8bbfa8d484c \
+  -H 'Content-Type: text/plain'
+
+```
+
+```http
+POST http://localhost:8082/v1/schedules/every?apiKey=b1b0d2d0cb1ef52a96cb5e66a66738bca95b4b8d8fbf0820b459f8bbfa8d484c HTTP/1.1
+Host: localhost:8082
+Content-Type: text/plain
+
 ```
 
 ```javascript
-const kittn = require('kittn');
+const inputBody = '{
+  "interval": "year",
+  "path": "/webhook",
+  "name": "Every 3"
+}';
+const headers = {
+  'Content-Type':'text/plain'
+};
 
-let api = kittn.authorize('meowmeowmeow');
+fetch('http://localhost:8082/v1/schedules/every?apiKey=b1b0d2d0cb1ef52a96cb5e66a66738bca95b4b8d8fbf0820b459f8bbfa8d484c',
+{
+  method: 'POST',
+  body: inputBody,
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+
 ```
 
-> Make sure to replace `meowmeowmeow` with your API key.
+```ruby
+require 'rest-client'
+require 'json'
 
-Kittn uses API keys to allow access to the API. You can register a new Kittn API key at our [developer portal](http://example.com/developers).
+headers = {
+  'Content-Type' => 'text/plain'
+}
 
-Kittn expects for the API key to be included in all API requests to the server in a header that looks like the following:
+result = RestClient.post 'http://localhost:8082/v1/schedules/every',
+  params: {
+  'apiKey' => 'string'
+}, headers: headers
 
-`Authorization: meowmeowmeow`
+p JSON.parse(result)
 
-<aside class="notice">
-You must replace <code>meowmeowmeow</code> with your personal API key.
+```
+
+```python
+import requests
+headers = {
+  'Content-Type': 'text/plain'
+}
+
+r = requests.post('http://localhost:8082/v1/schedules/every', params={
+  'apiKey': 'b1b0d2d0cb1ef52a96cb5e66a66738bca95b4b8d8fbf0820b459f8bbfa8d484c'
+}, headers = headers)
+
+print(r.json())
+
+```
+
+```php
+<?php
+
+require 'vendor/autoload.php';
+
+$headers = array(
+    'Content-Type' => 'text/plain',
+);
+
+$client = new \GuzzleHttp\Client();
+
+// Define array of request body.
+$request_body = array();
+
+try {
+    $response = $client->request('POST','http://localhost:8082/v1/schedules/every', array(
+        'headers' => $headers,
+        'json' => $request_body,
+       )
+    );
+    print_r($response->getBody()->getContents());
+ }
+ catch (\GuzzleHttp\Exception\BadResponseException $e) {
+    // handle exception or api errors.
+    print_r($e->getMessage());
+ }
+
+ // ...
+
+```
+
+```java
+URL obj = new URL("http://localhost:8082/v1/schedules/every?apiKey=b1b0d2d0cb1ef52a96cb5e66a66738bca95b4b8d8fbf0820b459f8bbfa8d484c");
+HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+con.setRequestMethod("POST");
+int responseCode = con.getResponseCode();
+BufferedReader in = new BufferedReader(
+    new InputStreamReader(con.getInputStream()));
+String inputLine;
+StringBuffer response = new StringBuffer();
+while ((inputLine = in.readLine()) != null) {
+    response.append(inputLine);
+}
+in.close();
+System.out.println(response.toString());
+
+```
+
+```go
+package main
+
+import (
+       "bytes"
+       "net/http"
+)
+
+func main() {
+
+    headers := map[string][]string{
+        "Content-Type": []string{"text/plain"},
+    }
+
+    data := bytes.NewBuffer([]byte{jsonReq})
+    req, err := http.NewRequest("POST", "http://localhost:8082/v1/schedules/every", data)
+    req.Header = headers
+
+    client := &http.Client{}
+    resp, err := client.Do(req)
+    // ...
+}
+
+```
+
+`POST /v1/schedules/every`
+
+> Body parameter
+
+```
+interval: year
+path: /webhook
+name: Every 3
+
+```
+
+<h3 id="every-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|apiKey|query|string|true|none|
+|body|body|string|true|none|
+
+<h3 id="every-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|none|None|
+
+<aside class="warning">
+To perform this operation, you must be authenticated by means of one of the following methods:
+apikey, apikey, apikey
 </aside>
 
-# Kittens
+## Delete Job
 
-## Get All Kittens
+<a id="opIdDeleteJob"></a>
 
-```ruby
-require 'kittn'
-
-api = Kittn::APIClient.authorize!('meowmeowmeow')
-api.kittens.get
-```
-
-```python
-import kittn
-
-api = kittn.authorize('meowmeowmeow')
-api.kittens.get()
-```
+> Code samples
 
 ```shell
-curl "http://example.com/api/kittens" \
-  -H "Authorization: meowmeowmeow"
+# You can also use wget
+curl -X DELETE http://localhost:8082/v1/schedules/aQYh78xwr1
+
+```
+
+```http
+DELETE http://localhost:8082/v1/schedules/aQYh78xwr1 HTTP/1.1
+Host: localhost:8082
+
 ```
 
 ```javascript
-const kittn = require('kittn');
 
-let api = kittn.authorize('meowmeowmeow');
-let kittens = api.kittens.get();
+fetch('http://localhost:8082/v1/schedules/aQYh78xwr1',
+{
+  method: 'DELETE'
+
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+
 ```
 
-> The above command returns JSON structured like this:
+```ruby
+require 'rest-client'
+require 'json'
 
-```json
-[
-  {
-    "id": 1,
-    "name": "Fluffums",
-    "breed": "calico",
-    "fluffiness": 6,
-    "cuteness": 7
-  },
-  {
-    "id": 2,
-    "name": "Max",
-    "breed": "unknown",
-    "fluffiness": 5,
-    "cuteness": 10
+result = RestClient.delete 'http://localhost:8082/v1/schedules/aQYh78xwr1',
+  params: {
   }
-]
+
+p JSON.parse(result)
+
 ```
 
-This endpoint retrieves all kittens.
+```python
+import requests
 
-### HTTP Request
+r = requests.delete('http://localhost:8082/v1/schedules/aQYh78xwr1')
 
-`GET http://example.com/api/kittens`
+print(r.json())
 
-### Query Parameters
+```
 
-Parameter | Default | Description
---------- | ------- | -----------
-include_cats | false | If set to true, the result will also include cats.
-available | true | If set to false, the result will include kittens that have already been adopted.
+```php
+<?php
 
-<aside class="success">
-Remember — a happy kitten is an authenticated kitten!
+require 'vendor/autoload.php';
+
+$client = new \GuzzleHttp\Client();
+
+// Define array of request body.
+$request_body = array();
+
+try {
+    $response = $client->request('DELETE','http://localhost:8082/v1/schedules/aQYh78xwr1', array(
+        'headers' => $headers,
+        'json' => $request_body,
+       )
+    );
+    print_r($response->getBody()->getContents());
+ }
+ catch (\GuzzleHttp\Exception\BadResponseException $e) {
+    // handle exception or api errors.
+    print_r($e->getMessage());
+ }
+
+ // ...
+
+```
+
+```java
+URL obj = new URL("http://localhost:8082/v1/schedules/aQYh78xwr1");
+HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+con.setRequestMethod("DELETE");
+int responseCode = con.getResponseCode();
+BufferedReader in = new BufferedReader(
+    new InputStreamReader(con.getInputStream()));
+String inputLine;
+StringBuffer response = new StringBuffer();
+while ((inputLine = in.readLine()) != null) {
+    response.append(inputLine);
+}
+in.close();
+System.out.println(response.toString());
+
+```
+
+```go
+package main
+
+import (
+       "bytes"
+       "net/http"
+)
+
+func main() {
+
+    data := bytes.NewBuffer([]byte{jsonReq})
+    req, err := http.NewRequest("DELETE", "http://localhost:8082/v1/schedules/aQYh78xwr1", data)
+    req.Header = headers
+
+    client := &http.Client{}
+    resp, err := client.Do(req)
+    // ...
+}
+
+```
+
+`DELETE /v1/schedules/aQYh78xwr1`
+
+<h3 id="delete-job-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|none|None|
+
+<aside class="warning">
+To perform this operation, you must be authenticated by means of one of the following methods:
+apikey, apikey, apikey
 </aside>
 
-## Get a Specific Kitten
+## Create Schedule
 
-```ruby
-require 'kittn'
+<a id="opIdCreateSchedule"></a>
 
-api = Kittn::APIClient.authorize!('meowmeowmeow')
-api.kittens.get(2)
-```
-
-```python
-import kittn
-
-api = kittn.authorize('meowmeowmeow')
-api.kittens.get(2)
-```
+> Code samples
 
 ```shell
-curl "http://example.com/api/kittens/2" \
-  -H "Authorization: meowmeowmeow"
+# You can also use wget
+curl -X POST http://localhost:8082/v1/schedules \
+  -H 'Content-Type: text/plain' \
+  -H 'X-API-Key: 8f8679cc07d2b17c7dd19f5d2086d2b1'
+
+```
+
+```http
+POST http://localhost:8082/v1/schedules HTTP/1.1
+Host: localhost:8082
+Content-Type: text/plain
+
+X-API-Key: 8f8679cc07d2b17c7dd19f5d2086d2b1
+
 ```
 
 ```javascript
-const kittn = require('kittn');
+const inputBody = '{
+  "name": "Event name",
+  "path": "/webhooks/reminder",
+  "when": "2021-11-08T12:59:33.874Z",
+  "data": {
+    "eventId": "111"
+  }
+}';
+const headers = {
+  'Content-Type':'text/plain',
+  'X-API-Key':'8f8679cc07d2b17c7dd19f5d2086d2b1'
+};
 
-let api = kittn.authorize('meowmeowmeow');
-let max = api.kittens.get(2);
-```
-
-> The above command returns JSON structured like this:
-
-```json
+fetch('http://localhost:8082/v1/schedules',
 {
-  "id": 2,
-  "name": "Max",
-  "breed": "unknown",
-  "fluffiness": 5,
-  "cuteness": 10
-}
+  method: 'POST',
+  body: inputBody,
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+
 ```
-
-This endpoint retrieves a specific kitten.
-
-<aside class="warning">Inside HTML code blocks like this one, you can't use Markdown, so use <code>&lt;code&gt;</code> blocks to denote code.</aside>
-
-### HTTP Request
-
-`GET http://example.com/kittens/<ID>`
-
-### URL Parameters
-
-Parameter | Description
---------- | -----------
-ID | The ID of the kitten to retrieve
-
-## Delete a Specific Kitten
 
 ```ruby
-require 'kittn'
+require 'rest-client'
+require 'json'
 
-api = Kittn::APIClient.authorize!('meowmeowmeow')
-api.kittens.delete(2)
+headers = {
+  'Content-Type' => 'text/plain',
+  'X-API-Key' => '8f8679cc07d2b17c7dd19f5d2086d2b1'
+}
+
+result = RestClient.post 'http://localhost:8082/v1/schedules',
+  params: {
+  }, headers: headers
+
+p JSON.parse(result)
+
 ```
 
 ```python
-import kittn
+import requests
+headers = {
+  'Content-Type': 'text/plain',
+  'X-API-Key': '8f8679cc07d2b17c7dd19f5d2086d2b1'
+}
 
-api = kittn.authorize('meowmeowmeow')
-api.kittens.delete(2)
+r = requests.post('http://localhost:8082/v1/schedules', headers = headers)
+
+print(r.json())
+
 ```
 
+```php
+<?php
+
+require 'vendor/autoload.php';
+
+$headers = array(
+    'Content-Type' => 'text/plain',
+    'X-API-Key' => '8f8679cc07d2b17c7dd19f5d2086d2b1',
+);
+
+$client = new \GuzzleHttp\Client();
+
+// Define array of request body.
+$request_body = array();
+
+try {
+    $response = $client->request('POST','http://localhost:8082/v1/schedules', array(
+        'headers' => $headers,
+        'json' => $request_body,
+       )
+    );
+    print_r($response->getBody()->getContents());
+ }
+ catch (\GuzzleHttp\Exception\BadResponseException $e) {
+    // handle exception or api errors.
+    print_r($e->getMessage());
+ }
+
+ // ...
+
+```
+
+```java
+URL obj = new URL("http://localhost:8082/v1/schedules");
+HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+con.setRequestMethod("POST");
+int responseCode = con.getResponseCode();
+BufferedReader in = new BufferedReader(
+    new InputStreamReader(con.getInputStream()));
+String inputLine;
+StringBuffer response = new StringBuffer();
+while ((inputLine = in.readLine()) != null) {
+    response.append(inputLine);
+}
+in.close();
+System.out.println(response.toString());
+
+```
+
+```go
+package main
+
+import (
+       "bytes"
+       "net/http"
+)
+
+func main() {
+
+    headers := map[string][]string{
+        "Content-Type": []string{"text/plain"},
+        "X-API-Key": []string{"8f8679cc07d2b17c7dd19f5d2086d2b1"},
+    }
+
+    data := bytes.NewBuffer([]byte{jsonReq})
+    req, err := http.NewRequest("POST", "http://localhost:8082/v1/schedules", data)
+    req.Header = headers
+
+    client := &http.Client{}
+    resp, err := client.Do(req)
+    // ...
+}
+
+```
+
+`POST /v1/schedules`
+
+> Body parameter
+
+```
+name: Event name
+path: /webhooks/reminder
+when: 2021-11-08T12:59:33.874Z
+data:
+  eventId: "111"
+
+```
+
+<h3 id="create-schedule-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|X-API-Key|header|string|true|none|
+|body|body|string|true|none|
+
+<h3 id="create-schedule-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|none|None|
+
+<aside class="warning">
+To perform this operation, you must be authenticated by means of one of the following methods:
+apikey, apikey, apikey
+</aside>
+
+## Get Jobs
+
+<a id="opIdGetJobs"></a>
+
+> Code samples
+
 ```shell
-curl "http://example.com/api/kittens/2" \
-  -X DELETE \
-  -H "Authorization: meowmeowmeow"
+# You can also use wget
+curl -X GET http://localhost:8082/v1/schedules?fromDate=2020-10-04T17%3A00%3A29.996Z
+
+```
+
+```http
+GET http://localhost:8082/v1/schedules?fromDate=2020-10-04T17%3A00%3A29.996Z HTTP/1.1
+Host: localhost:8082
+
 ```
 
 ```javascript
-const kittn = require('kittn');
 
-let api = kittn.authorize('meowmeowmeow');
-let max = api.kittens.delete(2);
-```
-
-> The above command returns JSON structured like this:
-
-```json
+fetch('http://localhost:8082/v1/schedules?fromDate=2020-10-04T17%3A00%3A29.996Z',
 {
-  "id": 2,
-  "deleted" : ":("
-}
+  method: 'GET'
+
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+
 ```
 
-This endpoint deletes a specific kitten.
+```ruby
+require 'rest-client'
+require 'json'
 
-### HTTP Request
+result = RestClient.get 'http://localhost:8082/v1/schedules',
+  params: {
+  'fromDate' => 'string'
+}
 
-`DELETE http://example.com/kittens/<ID>`
+p JSON.parse(result)
 
-### URL Parameters
+```
 
-Parameter | Description
---------- | -----------
-ID | The ID of the kitten to delete
+```python
+import requests
+
+r = requests.get('http://localhost:8082/v1/schedules', params={
+  'fromDate': '2020-10-04T17:00:29.996Z'
+})
+
+print(r.json())
+
+```
+
+```php
+<?php
+
+require 'vendor/autoload.php';
+
+$client = new \GuzzleHttp\Client();
+
+// Define array of request body.
+$request_body = array();
+
+try {
+    $response = $client->request('GET','http://localhost:8082/v1/schedules', array(
+        'headers' => $headers,
+        'json' => $request_body,
+       )
+    );
+    print_r($response->getBody()->getContents());
+ }
+ catch (\GuzzleHttp\Exception\BadResponseException $e) {
+    // handle exception or api errors.
+    print_r($e->getMessage());
+ }
+
+ // ...
+
+```
+
+```java
+URL obj = new URL("http://localhost:8082/v1/schedules?fromDate=2020-10-04T17%3A00%3A29.996Z");
+HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+con.setRequestMethod("GET");
+int responseCode = con.getResponseCode();
+BufferedReader in = new BufferedReader(
+    new InputStreamReader(con.getInputStream()));
+String inputLine;
+StringBuffer response = new StringBuffer();
+while ((inputLine = in.readLine()) != null) {
+    response.append(inputLine);
+}
+in.close();
+System.out.println(response.toString());
+
+```
+
+```go
+package main
+
+import (
+       "bytes"
+       "net/http"
+)
+
+func main() {
+
+    data := bytes.NewBuffer([]byte{jsonReq})
+    req, err := http.NewRequest("GET", "http://localhost:8082/v1/schedules", data)
+    req.Header = headers
+
+    client := &http.Client{}
+    resp, err := client.Do(req)
+    // ...
+}
+
+```
+
+`GET /v1/schedules`
+
+<h3 id="get-jobs-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|fromDate|query|string|true|none|
+
+<h3 id="get-jobs-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|none|None|
+
+<aside class="warning">
+To perform this operation, you must be authenticated by means of one of the following methods:
+apikey, apikey, apikey
+</aside>
+
+## Get Job
+
+<a id="opIdGetJob"></a>
+
+> Code samples
+
+```shell
+# You can also use wget
+curl -X GET http://localhost:8082/v1/schedules/TMAe3VqcC1
+
+```
+
+```http
+GET http://localhost:8082/v1/schedules/TMAe3VqcC1 HTTP/1.1
+Host: localhost:8082
+
+```
+
+```javascript
+
+fetch('http://localhost:8082/v1/schedules/TMAe3VqcC1',
+{
+  method: 'GET'
+
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+
+```
+
+```ruby
+require 'rest-client'
+require 'json'
+
+result = RestClient.get 'http://localhost:8082/v1/schedules/TMAe3VqcC1',
+  params: {
+  }
+
+p JSON.parse(result)
+
+```
+
+```python
+import requests
+
+r = requests.get('http://localhost:8082/v1/schedules/TMAe3VqcC1')
+
+print(r.json())
+
+```
+
+```php
+<?php
+
+require 'vendor/autoload.php';
+
+$client = new \GuzzleHttp\Client();
+
+// Define array of request body.
+$request_body = array();
+
+try {
+    $response = $client->request('GET','http://localhost:8082/v1/schedules/TMAe3VqcC1', array(
+        'headers' => $headers,
+        'json' => $request_body,
+       )
+    );
+    print_r($response->getBody()->getContents());
+ }
+ catch (\GuzzleHttp\Exception\BadResponseException $e) {
+    // handle exception or api errors.
+    print_r($e->getMessage());
+ }
+
+ // ...
+
+```
+
+```java
+URL obj = new URL("http://localhost:8082/v1/schedules/TMAe3VqcC1");
+HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+con.setRequestMethod("GET");
+int responseCode = con.getResponseCode();
+BufferedReader in = new BufferedReader(
+    new InputStreamReader(con.getInputStream()));
+String inputLine;
+StringBuffer response = new StringBuffer();
+while ((inputLine = in.readLine()) != null) {
+    response.append(inputLine);
+}
+in.close();
+System.out.println(response.toString());
+
+```
+
+```go
+package main
+
+import (
+       "bytes"
+       "net/http"
+)
+
+func main() {
+
+    data := bytes.NewBuffer([]byte{jsonReq})
+    req, err := http.NewRequest("GET", "http://localhost:8082/v1/schedules/TMAe3VqcC1", data)
+    req.Header = headers
+
+    client := &http.Client{}
+    resp, err := client.Do(req)
+    // ...
+}
+
+```
+
+`GET /v1/schedules/TMAe3VqcC1`
+
+<h3 id="get-job-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|none|None|
+
+<aside class="warning">
+To perform this operation, you must be authenticated by means of one of the following methods:
+apikey, apikey, apikey
+</aside>
 
